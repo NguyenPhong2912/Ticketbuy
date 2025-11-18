@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>GreenBus - Đăng nhập</title>
+  <link rel="stylesheet" href="../../components/Loginform/css.css?v=1.0" />
+  <link rel="stylesheet" href="../../components/Login-button/css.css?v=1.0" />
+  <link rel="stylesheet" href="../../components/Login-freetime/css.css?v=1.0" />
+  <link rel="stylesheet" href="../../components/Button_general/css.css?v=1.0" />
+  <link rel="stylesheet" href="../../components/Notifications/css.css?v=1.0" />
+  <link rel="stylesheet" href="login.css?v=4.0" />
+</head>
+<body>
+  <!-- Video Wall Background -->
+  <div class="video-wall-container">
+    <video class="video-wall" autoplay muted loop playsinline>
+      <source src="../../assets/Video wall/wall login.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <header class="top-bar">
+    <div class="brand">
+      <img src="../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="GreenBus" />
+      <span>GreenBus</span>
+    </div>
+    <nav class="nav-links">
+      <a href="../user/home page/index.html">Trang chủ</a>
+      <a href="../user/routes/index.html">Tuyến phổ biến</a>
+      <a href="../user/booking/index.html">Đặt vé</a>
+    </nav>
+  </header>
+
+  <main class="auth-shell">
+    <section class="info-panel">
+      <div class="logo-section">
+        <img src="../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="GreenBus Logo" class="main-logo" />
+        <h1>Chào mừng đến GreenBus!</h1>
+      </div>
+      <p>
+        GreenBus cung cấp giải pháp đặt vé tiện lợi cho khách hàng và công cụ quản trị mạnh mẽ
+        cho đội ngũ vận hành. Đăng nhập bằng tài khoản được cấp để tiếp tục.
+      </p>
+
+      <ul class="benefits">
+        <li>💳 Thanh toán an toàn & bảo mật</li>
+        <li>🚌 Cập nhật lịch trình theo thời gian thực</li>
+        <li>📈 Dashboard tổng quan cho quản trị viên</li>
+      </ul>
+
+      <!-- Login-freetime component với time server - chỉ 1 toaster -->
+      <div class="freetime-container">
+        <div class="tooltip-container time-server-toaster">
+          <span class="tooltip">
+            <div class="time-tooltip-content">
+              <div class="time-tooltip-title">🌍 Time Server - 3 Quốc Gia</div>
+              
+              <!-- US Time -->
+              <div class="time-server-item-tooltip">
+                <div class="time-tooltip-header">
+                  <span class="flag-large">🇺🇸</span>
+                  <div>
+                    <strong>Mỹ (EST/EDT)</strong>
+                    <small>America/New_York</small>
+                  </div>
+                </div>
+                <div class="time-tooltip-time" id="timeUSTooltip">--:--:--</div>
+              </div>
+              
+              <!-- China Time -->
+              <div class="time-server-item-tooltip">
+                <div class="time-tooltip-header">
+                  <span class="flag-large">🇨🇳</span>
+                  <div>
+                    <strong>Trung Quốc (CST)</strong>
+                    <small>Asia/Shanghai</small>
+                  </div>
+                </div>
+                <div class="time-tooltip-time" id="timeCNTooltip">--:--:--</div>
+              </div>
+              
+              <!-- Vietnam Time -->
+              <div class="time-server-item-tooltip">
+                <div class="time-tooltip-header">
+                  <span class="flag-large">🇻🇳</span>
+                  <div>
+                    <strong>Việt Nam (ICT)</strong>
+                    <small>Asia/Ho_Chi_Minh</small>
+                  </div>
+                </div>
+                <div class="time-tooltip-time" id="timeVNTooltip">--:--:--</div>
+              </div>
+            </div>
+          </span>
+          <span class="toasterGroup">
+            <svg class="toaster" width="88" height="50" viewBox="0 0 88 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="88" height="50"></rect>
+              <path class="block" d="M13.9561 1.74707H67.7607C73.9513 1.74707 78.9695 6.76558 78.9697 12.9561V48.0791H2.74707V12.9561C2.74733 6.76574 7.76574 1.74732 13.9561 1.74707Z" fill="#505050" stroke="#C0BABA" stroke-width="1.49457"></path>
+              <rect x="2.5" y="43.3478" width="76.7174" height="4.97826" fill="#A6A4A4" stroke="#C0BABA"></rect>
+              <path class="lever" d="M84.2008 13.3305C84.8197 13.3305 85.3217 13.8318 85.3219 14.4507V17.4399C85.3219 18.059 84.8199 18.561 84.2008 18.561H80.0914V13.3305H84.2008Z" fill="#A6A4A4" stroke="#C0BABA" stroke-width="0.747283"></path>
+              <path d="M8.22558 18.9348C8.22558 18.9348 6.95407 11.7886 10.1771 8.8166C12.9835 6.22883 19.9348 7.13024 19.9348 7.13024" stroke="white" stroke-opacity="0.125" stroke-width="1.49457"></path>
+              <circle class="timer" cx="67.7609" cy="24.913" r="2.98913" fill="#A6A4A4"></circle>
+              <circle cx="67.7609" cy="24.913" r="3.36277" stroke="white" stroke-opacity="0.5" stroke-width="0.747283" stroke-linecap="square"></circle>
+              <circle cx="67.7609" cy="33.8804" r="2.98913" fill="#A6A4A4"></circle>
+              <circle cx="67.7609" cy="33.8804" r="3.36277" stroke="white" stroke-opacity="0.5" stroke-width="0.747283" stroke-linecap="square"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <!-- Tab buttons using Button_general component -->
+      <div class="form-tabs">
+        <button class="button tab-button active" id="loginTabBtn" data-tab="login">
+          <div class="blob1"></div>
+          <div class="blob2"></div>
+          <div class="inner">Đăng nhập</div>
+        </button>
+        <button class="button tab-button" id="registerTabBtn" data-tab="register">
+          <div class="blob1"></div>
+          <div class="blob2"></div>
+          <div class="inner">Đăng ký</div>
+        </button>
+      </div>
+
+      <!-- Loginform component -->
+      <div class="wrapper">
+        <div class="card-switch">
+          <label class="switch">
+            <input type="checkbox" class="toggle" id="formToggle">
+            <span class="slider"></span>
+            <span class="card-side"></span>
+            <div class="flip-card__inner">
+              <!-- Login Side -->
+              <div class="flip-card__front">
+                <div class="title">Đăng nhập</div>
+                <form class="flip-card__form" id="loginForm" autocomplete="on">
+                  <input class="flip-card__input" id="loginIdentifier" name="identifier" placeholder="Email hoặc số điện thoại" type="text" required>
+                  <input class="flip-card__input" id="loginPassword" name="password" placeholder="Mật khẩu" type="password" required>
+                  <div class="form-options">
+                    <label class="remember-check">
+                      <input type="checkbox" id="rememberMe">
+                      <span>Ghi nhớ</span>
+                    </label>
+                    <a href="#" class="forgot-link" id="forgotPasswordLink">Quên mật khẩu?</a>
+                  </div>
+                  <button type="submit" class="flip-card__btn login-button-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+                      <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                      <path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path>
+                      <path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path>
+                      <path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path>
+                      <path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path>
+                      <path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path>
+                      <path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path>
+                      <path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path>
+                      <path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path>
+                    </svg>
+                    <span class="now">Đăng nhập</span>
+                    <span class="play">Đăng nhập</span>
+                  </button>
+                </form>
+              </div>
+              <!-- Register Side -->
+              <div class="flip-card__back">
+                <div class="title">Đăng ký</div>
+                <form class="flip-card__form" id="registerForm" autocomplete="off">
+                  <input class="flip-card__input" id="registerName" placeholder="Họ và tên" type="text" required>
+                  <input class="flip-card__input" id="registerEmail" name="email" placeholder="Email" type="email" required>
+                  <input class="flip-card__input" id="registerPhone" placeholder="Số điện thoại" type="tel" required>
+                  <input class="flip-card__input" id="registerPassword" name="password" placeholder="Mật khẩu" type="password" required>
+                  <button type="submit" class="flip-card__btn login-button-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
+                      <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
+                      <path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59 c1.67-2.06,2.76-3.48,6.78-4.41c3-0.7,7.13-0.23,9,1c2.15,1.42,3.37,6.67,3.81,11.29c1.49-0.3,5.21,0.2,5.5,1.28 C40.89,30.29,39.48,38.31,38.67,42z"></path>
+                      <path fill="#b71c1c" d="M39.02,42H11.99c-0.22-2.67-0.48-7.05-0.49-12.72c0.83,4.18,1.63,9.59,6.98,9.79 c3.48,0.12,8.27,0.55,9.83-2.45c1.57-3,3.72-8.95,3.51-15.62c-0.19-5.84-1.75-8.2-2.13-8.7c0.59,0.66,3.74,4.49,4.01,11.7 c0.03,0.83,0.06,1.72,0.08,2.66c4.21-0.15,5.93,1.5,6.07,2.35C40.68,33.85,39.8,38.9,39.02,42z"></path>
+                      <path fill="#212121" d="M35,27.17c0,3.67-0.28,11.2-0.42,14.83h-2C32.72,38.42,33,30.83,33,27.17 c0-5.54-1.46-12.65-3.55-14.02c-1.65-1.08-5.49-1.48-8.23-0.85c-3.62,0.83-4.57,1.99-6.14,3.92L15,16.32 c-1.31,1.6-2.59,6.92-3,8.96v10.8c0,2.58,0.28,4.61,0.54,5.92H10.5c-0.25-1.41-0.5-3.42-0.5-5.92l0.02-11.09 c0.15-0.77,1.55-7.63,3.43-9.94l0.08-0.09c1.65-2.03,2.96-3.63,7.25-4.61c3.28-0.76,7.67-0.25,9.77,1.13 C33.79,13.6,35,22.23,35,27.17z"></path>
+                      <path fill="#01579b" d="M17.165,17.283c5.217-0.055,9.391,0.283,9,6.011c-0.391,5.728-8.478,5.533-9.391,5.337 c-0.913-0.196-7.826-0.043-7.696-5.337C9.209,18,13.645,17.32,17.165,17.283z"></path>
+                      <path fill="#212121" d="M40.739,37.38c-0.28,1.99-0.69,3.53-1.22,4.62h-2.43c0.25-0.19,1.13-1.11,1.67-4.9 c0.57-4-0.23-11.79-0.93-12.78c-0.4-0.4-2.63-0.8-4.37-0.89l0.1-1.99c1.04,0.05,4.53,0.31,5.71,1.49 C40.689,24.36,41.289,33.53,40.739,37.38z"></path>
+                      <path fill="#81d4fa" d="M10.154,20.201c0.261,2.059-0.196,3.351,2.543,3.546s8.076,1.022,9.402-0.554 c1.326-1.576,1.75-4.365-0.891-5.267C19.336,17.287,12.959,16.251,10.154,20.201z"></path>
+                      <path fill="#212121" d="M17.615,29.677c-0.502,0-0.873-0.03-1.052-0.069c-0.086-0.019-0.236-0.035-0.434-0.06 c-5.344-0.679-8.053-2.784-8.052-6.255c0.001-2.698,1.17-7.238,8.986-7.32l0.181-0.002c3.444-0.038,6.414-0.068,8.272,1.818 c1.173,1.191,1.712,3,1.647,5.53c-0.044,1.688-0.785,3.147-2.144,4.217C22.785,29.296,19.388,29.677,17.615,29.677z M17.086,17.973 c-7.006,0.074-7.008,4.023-7.008,5.321c-0.001,3.109,3.598,3.926,6.305,4.27c0.273,0.035,0.48,0.063,0.601,0.089 c0.563,0.101,4.68,0.035,6.855-1.732c0.865-0.702,1.299-1.57,1.326-2.653c0.051-1.958-0.301-3.291-1.073-4.075 c-1.262-1.281-3.834-1.255-6.825-1.222L17.086,17.973z"></path>
+                      <path fill="#e1f5fe" d="M15.078,19.043c1.957-0.326,5.122-0.529,4.435,1.304c-0.489,1.304-7.185,2.185-7.185,0.652 C12.328,19.467,15.078,19.043,15.078,19.043z"></path>
+                    </svg>
+                    <span class="now">Đăng ký</span>
+                    <span class="play">Đăng ký</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    © 2025 GreenBus. Mọi quyền được bảo lưu.
+  </footer>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center;">
+    <div style="background: white; padding: 2rem; border-radius: 1rem; max-width: 450px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 style="margin: 0; font-size: 1.5rem; color: #333;">Quên mật khẩu?</h3>
+        <button id="closeForgotModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">&times;</button>
+      </div>
+      <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+        Nhập email của bạn để reset mật khẩu. Mật khẩu mới sẽ được gửi về email của bạn.
+      </p>
+      <form id="forgotPasswordForm">
+        <div style="margin-bottom: 1.5rem;">
+          <input 
+            type="email" 
+            id="forgotEmail" 
+            placeholder="Email của bạn" 
+            required
+            style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 0.5rem; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s;"
+            onfocus="this.style.borderColor='#4CAF50'"
+            onblur="this.style.borderColor='#e0e0e0'"
+          >
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button 
+            type="button" 
+            id="cancelForgotBtn"
+            style="flex: 1; padding: 0.75rem; border: 2px solid #e0e0e0; background: white; border-radius: 0.5rem; font-size: 1rem; cursor: pointer; transition: all 0.3s;"
+            onmouseover="this.style.borderColor='#999'; this.style.backgroundColor='#f5f5f5'"
+            onmouseout="this.style.borderColor='#e0e0e0'; this.style.backgroundColor='white'"
+          >
+            Hủy
+          </button>
+          <button 
+            type="submit"
+            style="flex: 1; padding: 0.75rem; border: none; background: #4CAF50; color: white; border-radius: 0.5rem; font-size: 1rem; cursor: pointer; transition: background 0.3s; font-weight: 500;"
+            onmouseover="this.style.background='#45a049'"
+            onmouseout="this.style.background='#4CAF50'"
+          >
+            Gửi yêu cầu
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="notificationStack" class="notification-stack" aria-live="polite" aria-atomic="true"></div>
+  <script src="../../helpers/assets.js"></script>
+  <script src="login.js?v=3.0"></script>
+  <script>
+    // Time server display for 3 countries
+    function updateTimes() {
+      const now = new Date();
+      
+      // US time (America/New_York - EST/EDT)
+      const usTime = now.toLocaleTimeString('en-US', { 
+        timeZone: 'America/New_York',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      const usEl = document.getElementById('timeUS');
+      const usTooltip = document.getElementById('timeUSTooltip');
+      if (usEl) usEl.textContent = usTime;
+      if (usTooltip) usTooltip.textContent = usTime;
+      
+      // China time (Asia/Shanghai - CST)
+      const cnTime = now.toLocaleTimeString('en-US', { 
+        timeZone: 'Asia/Shanghai',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      const cnEl = document.getElementById('timeCN');
+      const cnTooltip = document.getElementById('timeCNTooltip');
+      if (cnEl) cnEl.textContent = cnTime;
+      if (cnTooltip) cnTooltip.textContent = cnTime;
+      
+      // Vietnam time (Asia/Ho_Chi_Minh - ICT)
+      const vnTime = now.toLocaleTimeString('en-US', { 
+        timeZone: 'Asia/Ho_Chi_Minh',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      const vnEl = document.getElementById('timeVN');
+      const vnTooltip = document.getElementById('timeVNTooltip');
+      if (vnEl) vnEl.textContent = vnTime;
+      if (vnTooltip) vnTooltip.textContent = vnTime;
+    }
+    
+    // Update times immediately and then every second
+    updateTimes();
+    setInterval(updateTimes, 1000);
+    
+    // Tab switching
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginTabBtn = document.getElementById('loginTabBtn');
+      const registerTabBtn = document.getElementById('registerTabBtn');
+      const formToggle = document.getElementById('formToggle');
+      
+      loginTabBtn.addEventListener('click', () => {
+        loginTabBtn.classList.add('active');
+        registerTabBtn.classList.remove('active');
+        if (formToggle) formToggle.checked = false;
+      });
+      
+      registerTabBtn.addEventListener('click', () => {
+        registerTabBtn.classList.add('active');
+        loginTabBtn.classList.remove('active');
+        if (formToggle) formToggle.checked = true;
+      });
+      
+      // Sync with toggle
+      if (formToggle) {
+        formToggle.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            registerTabBtn.classList.add('active');
+            loginTabBtn.classList.remove('active');
+          } else {
+            loginTabBtn.classList.add('active');
+            registerTabBtn.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

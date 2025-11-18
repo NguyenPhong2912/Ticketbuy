@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Quản lý Khách hàng - GreenBus Admin</title>
+    <link rel="stylesheet" href="/Ticketbuy-main/SourceCode/frontend/src/pages/admin/admin.css?v=1.0">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>GreenBus Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="../routes/routes.html" class="nav-item">
+                    <span class="nav-item-icon">🛣️</span>
+                    Tuyến xe
+                </a>
+                <a href="../bookings/bookings.html" class="nav-item">
+                    <span class="nav-item-icon">🎫</span>
+                    Đặt vé
+                </a>
+                <a href="customers.html" class="nav-item active">
+                    <span class="nav-item-icon">👥</span>
+                    Khách hàng
+                </a>
+                <a href="../promotions/promotions.html" class="nav-item">
+                    <span class="nav-item-icon">🎁</span>
+                    Khuyến mãi
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Quản lý Khách hàng</h1>
+                <p class="page-subtitle">Xem và quản lý thông tin khách hàng</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Danh sách khách hàng</h2>
+                    <button class="btn btn-primary" id="addCustomerBtn">+ Thêm khách hàng</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Vai trò</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <tr><td colspan="6" class="loading">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="customerModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 0.75rem; max-width: 500px; width: 90%;">
+            <h3 style="margin-bottom: 1.5rem;" id="modalTitle">Thêm khách hàng</h3>
+            <form id="customerForm">
+                <div class="form-group">
+                    <label class="form-label">Tên *</label>
+                    <input type="text" class="form-input" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" id="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-input" id="customerPhone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu *</label>
+                    <input type="password" class="form-input" id="customerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Vai trò</label>
+                    <select class="form-input" id="customerRole">
+                        <option value="user">Khách hàng</option>
+                        <option value="admin">Quản trị viên</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" id="cancelCustomerBtn">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/Ticketbuy-main/SourceCode/frontend/src/helpers/api.js" defer></script>
+    <script src="customers.js" defer></script>
+</body>
+</html>

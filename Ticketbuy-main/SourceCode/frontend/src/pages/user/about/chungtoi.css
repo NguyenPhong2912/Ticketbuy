@@ -1,0 +1,161 @@
+/* ---------------------- */
+/* 🔹 CÀI ĐẶT CHUNG */
+/* ---------------------- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+/* ---------------------- */
+/* 🔹 HEADER */
+/* ---------------------- */
+.header {
+  background-color: #111;
+  color: #fff;
+  padding: 15px 40px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* căn trái - phải */
+  align-items: center;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-wrap .logo {
+  height: 40px;
+}
+
+.logo-wrap h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Nút về trang chủ */
+.main-nav .btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  border: 1px solid #fefefe;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.main-nav .btn:hover {
+  background-color: #e4e4e4;
+  color: #fff;
+}
+
+/* ---------------------- */
+/* 🔹 CONTACT SECTION */
+/* ---------------------- */
+.contact-section {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.contact-section .desc {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Bố cục 2 cột: Thông tin + bản đồ */
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-info h3 {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  color: #333;
+}
+
+.contact-info li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Bản đồ */
+.contact-map {
+  flex: 1;
+  min-width: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------- */
+/* 🔹 FOOTER */
+/* ---------------------- */
+.footer {
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  font-size: 15px;
+}
+
+/* ---------------------- */
+/* 🔹 RESPONSIVE */
+/* ---------------------- */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .logo-wrap h1 {
+    font-size: 20px;
+  }
+
+  .main-nav .btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .contact-content {
+    flex-direction: column;
+  }
+
+  .contact-map {
+    min-width: 100%;
+  }
+}

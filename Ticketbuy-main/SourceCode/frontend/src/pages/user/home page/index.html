@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>GreenBus - Đặt vé xe trực tuyến</title>
+<link rel="stylesheet" href="home.css?v=2.0" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <img src="../../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="GreenBus">
+      <span class="brand">GreenBus</span>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Trang chủ</a>
+      <a href="../booking/index.html">Đặt vé</a>
+      <a href="../routes/index.html">Tuyến phổ biến</a>
+      <a href="../about/index.html">Về chúng tôi</a>
+      <div class="user-nav" id="userNav">
+        <button class="user-toggle hidden" id="userMenuToggle" type="button">
+          <span class="user-name" id="userMenuName">Tài khoản</span>
+          <span class="user-role" id="userMenuRole"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
+        <div class="user-dropdown hidden" id="userDropdown">
+          <div class="user-info">
+            <p id="userDropdownName">GreenBus</p>
+            <small id="userDropdownEmail"></small>
+          </div>
+          <a href="../account/index.html">Quản lý tài khoản</a>
+          <button type="button" id="logoutBtn">Đăng xuất</button>
+        </div>
+        <a href="../../auth/login.html" class="btn-login" id="navAuthLink">Đăng nhập / Đăng ký</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-left">
+      <h1>GreenBus — An toàn & Tiện lợi</h1>
+      <p>Đặt vé nhanh, chọn ghế dễ dàng, trải nghiệm hành trình xanh.</p>
+      <a href="../booking/index.html" class="btn">Tìm chuyến ngay</a>
+    </div>
+    <div class="hero-right"><img src="../../../assets/images/HÌNH BANNER XE BUS.png" data-asset-src="images/HÌNH BANNER XE BUS.png" alt="banner"></div>
+  </div>
+</section>
+
+<main class="container content">
+  <section class="search-form card">
+    <form id="quickSearch">
+      <div class="row">
+        <label>Đi từ<input id="qFrom" type="text" placeholder="Ví dụ: TP. HCM"></label>
+        <label>Đến<input id="qTo" type="text" placeholder="Ví dụ: Đà Lạt"></label>
+        <label>Ngày<input id="qDate" type="date"></label>
+        <label>Số vé<input id="qSeats" type="number" min="1" value="1"></label>
+        <button type="submit" class="btn">Tìm chuyến</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="promotions">
+    <h2>Khuyến mãi nổi bật</h2>
+    <div class="promo-grid">
+      <div class="promo-card"><img src="../../../assets/images/sale.jpg" data-asset-src="images/sale.jpg" alt=""><p>Giảm 10% khi đặt vé online</p></div>
+      <div class="promo-card"><img src="../../../assets/images/khách hàng mới.png" data-asset-src="images/khách hàng mới.png" alt=""><p>Tặng mã giảm giá cho khách hàng mới</p></div>
+      <div class="promo-card"><img src="../../../assets/images/đặt sớm giá rẻ.png" data-asset-src="images/đặt sớm giá rẻ.png" alt=""><p>Đặt sớm – Giá tốt hơn</p></div>
+    </div>
+  </section>
+
+  <section class="popular">
+    <h2>Tuyến phổ biến</h2>
+    <div class="card-grid">
+      <article class="route-card"><img src="../../../assets/images/HCM DALAT.png" data-asset-src="images/HCM DALAT.png" alt=""><div class="card-body"><h3>TP. HCM → Đà Lạt</h3><p>300 km · 8 giờ · <strong>290.000₫</strong></p><a class="btn outline" href="../booking/index.html">Đặt vé</a></div></article>
+      <article class="route-card"><img src="../../../assets/images/DA NANG NHA TRANG.png" data-asset-src="images/DA NANG NHA TRANG.png" alt=""><div class="card-body"><h3>Đà Nẵng → Nha Trang</h3><p>550 km · 10 giờ · <strong>380.000₫</strong></p><a class="btn outline" href="../booking/index.html">Đặt vé</a></div></article>
+      <article class="route-card"><img src="../../../assets/images/CANTHO HCM.png" data-asset-src="images/CANTHO HCM.png" alt=""><div class="card-body"><h3>Cần Thơ → Sài Gòn</h3><p>165 km · 5 giờ · <strong>165.000₫</strong></p><a class="btn outline" href="../booking/index.html">Đặt vé</a></div></article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="container footer-inner"><div><strong>GreenBus Lines</strong><p>Địa chỉ: 549-36 lê văn thọ , Gò Vấp , TP. HCM · Hotline: 1900-1234</p></div><div>© 2025 GreenBus</div></div></footer>
+
+<script src="../../../helpers/assets.js"></script>
+<script src="../../../helpers/api.js"></script>
+<script src="main.js?v=2.0"></script>
+</body>
+</html>

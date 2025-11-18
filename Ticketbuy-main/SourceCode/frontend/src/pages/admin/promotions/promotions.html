@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Quản lý Khuyến mãi - GreenBus Admin</title>
+    <link rel="stylesheet" href="/Ticketbuy-main/SourceCode/frontend/src/pages/admin/admin.css?v=1.0">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>GreenBus Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="../routes/routes.html" class="nav-item">
+                    <span class="nav-item-icon">🛣️</span>
+                    Tuyến xe
+                </a>
+                <a href="../bookings/bookings.html" class="nav-item">
+                    <span class="nav-item-icon">🎫</span>
+                    Đặt vé
+                </a>
+                <a href="../customers/customers.html" class="nav-item">
+                    <span class="nav-item-icon">👥</span>
+                    Khách hàng
+                </a>
+                <a href="promotions.html" class="nav-item active">
+                    <span class="nav-item-icon">🎁</span>
+                    Khuyến mãi
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Quản lý Khuyến mãi</h1>
+                <p class="page-subtitle">Tạo và quản lý các mã khuyến mãi</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Danh sách khuyến mãi</h2>
+                    <button class="btn btn-primary" id="addPromoBtn">+ Thêm khuyến mãi</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Mã code</th>
+                                    <th>Mô tả</th>
+                                    <th>Giảm giá</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="promotionsTableBody">
+                                <tr><td colspan="6" class="loading">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="promoModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 0.75rem; max-width: 500px; width: 90%;">
+            <h3 style="margin-bottom: 1.5rem;" id="modalTitle">Thêm khuyến mãi</h3>
+            <form id="promoForm">
+                <div class="form-group">
+                    <label class="form-label">Mã code *</label>
+                    <input type="text" class="form-input" id="promoCode" required placeholder="VD: SUMMER2025">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mô tả</label>
+                    <input type="text" class="form-input" id="promoDescription" placeholder="VD: Khuyến mãi mùa hè">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Giảm giá (%) *</label>
+                    <input type="number" class="form-input" id="promoDiscount" required min="0" max="100" placeholder="15">
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" id="cancelPromoBtn">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/Ticketbuy-main/SourceCode/frontend/src/helpers/api.js" defer></script>
+    <script src="promotions.js" defer></script>
+</body>
+</html>

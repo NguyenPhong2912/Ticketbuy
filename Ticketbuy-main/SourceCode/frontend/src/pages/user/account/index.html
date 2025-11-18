@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Tài khoản của tôi - GreenBus</title>
+  <link rel="stylesheet" href="account.css?v=3.0" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="../../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="GreenBus Logo" />
+        <span class="brand">GreenBus</span>
+      </div>
+      <nav class="main-nav">
+        <a href="../home page/index.html">Trang chủ</a>
+        <a href="../booking/index.html">Đặt vé</a>
+        <a href="../routes/index.html">Tuyến phổ biến</a>
+        <a href="../about/index.html">Về chúng tôi</a>
+        <div class="user-nav" id="userNav">
+          <button class="user-toggle hidden" id="userMenuToggle" type="button">
+            <span class="user-name" id="userMenuName">Tài khoản</span>
+            <span class="user-role" id="userMenuRole"></span>
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+            </svg>
+          </button>
+          <div class="user-dropdown hidden" id="userDropdown">
+            <div class="user-info">
+              <p id="userDropdownName">GreenBus</p>
+              <small id="userDropdownEmail"></small>
+            </div>
+            <a href="index.html">Bảng điều khiển tài khoản</a>
+            <button type="button" id="logoutBtn">Đăng xuất</button>
+          </div>
+          <a href="../../auth/login.html" class="btn-login" id="navAuthLink">Đăng nhập / Đăng ký</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="account-shell">
+    <section class="card account-hero">
+      <div>
+        <p class="eyebrow">Tài khoản của bạn</p>
+        <h1 id="accountGreeting">Xin chào!</h1>
+        <p class="hero-copy">Quản lý thông tin cá nhân, theo dõi vé đã đặt và phương thức thanh toán trong một nơi duy nhất.</p>
+      </div>
+      <div class="badge" id="roleBadge">Đang tải…</div>
+    </section>
+
+    <section class="stats-grid" id="accountStats">
+      <article class="stat-card">
+        <p class="stat-label">Tổng vé đã đặt</p>
+        <p class="stat-value" id="statTotalTickets">0</p>
+        <span class="stat-trend">Tính cả lịch sử</span>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Vé đang chờ</p>
+        <p class="stat-value" id="statPendingTickets">0</p>
+        <span class="stat-trend status-neutral">Chờ xác nhận</span>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Phương thức thanh toán</p>
+        <p class="stat-value" id="statPaymentMethods">0</p>
+        <span class="stat-trend">Lưu để thanh toán nhanh</span>
+      </article>
+    </section>
+
+    <section class="card profile-card">
+      <div class="card-header">
+        <h2>Thông tin cá nhân</h2>
+        <span class="status-pill online">Đã xác thực</span>
+      </div>
+      <div id="adminPanelButton" class="admin-panel-button hidden" style="margin-bottom: 24px;">
+        <a href="../../admin/admin/admin.html" class="btn-admin-panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+          </svg>
+          Vào trang quản lý
+        </a>
+      </div>
+      <dl class="profile-details">
+        <div>
+          <dt>Họ và tên</dt>
+          <dd id="profileName">—</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd id="profileEmail">—</dd>
+        </div>
+        <div>
+          <dt>Số điện thoại</dt>
+          <dd id="profilePhone">—</dd>
+        </div>
+        <div>
+          <dt>Vai trò</dt>
+          <dd id="profileRole">—</dd>
+        </div>
+        <div>
+          <dt>Ngày tham gia</dt>
+          <dd id="profileJoin">—</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="card bookings-card">
+      <div class="card-header">
+        <h2>Vé đã đặt</h2>
+        <div class="header-actions">
+          <button class="ghost-btn" type="button" id="generateQRBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: middle;">
+              <rect x="3" y="3" width="5" height="5"></rect>
+              <rect x="16" y="3" width="5" height="5"></rect>
+              <rect x="3" y="16" width="5" height="5"></rect>
+              <path d="M21 16h-3"></path>
+              <path d="M9 21v-3"></path>
+              <path d="M21 12v-1"></path>
+              <path d="M12 3H13"></path>
+              <path d="M3 12h1"></path>
+              <path d="M12 8v1"></path>
+            </svg>
+            Tạo QR
+          </button>
+          <button class="ghost-btn" type="button" id="refreshBookingsBtn">Làm mới</button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã</th>
+              <th>Tuyến</th>
+              <th>Ngày đi</th>
+              <th>Số ghế</th>
+              <th>Ghế</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody id="bookingRows">
+            <tr><td colspan="6" class="muted">Đang tải dữ liệu…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card payments-card">
+      <div class="card-header">
+        <div>
+          <h2>Phương thức thanh toán</h2>
+          <p class="muted">Lưu thẻ hoặc tài khoản ngân hàng để thanh toán nhanh hơn.</p>
+        </div>
+        <button class="btn-pill" type="button" id="togglePaymentForm">Thêm mới</button>
+      </div>
+      <ul class="payment-list" id="paymentList">
+        <li class="muted">Chưa có phương thức nào.</li>
+      </ul>
+      <form class="payment-form hidden" id="paymentForm">
+        <div class="form-group">
+          <label>
+            <span>Phương thức thanh toán</span>
+            <select id="paymentMethod" required>
+              <option value="card">Thẻ Visa/Mastercard/JCB</option>
+              <option value="vietqr">VietQR</option>
+              <option value="momo">MoMo</option>
+            </select>
+          </label>
+        </div>
+        
+        <!-- Card Payment Fields -->
+        <div id="cardFields" class="payment-method-fields">
+          <div class="form-grid">
+            <label>
+              <span>Tên hiển thị</span>
+              <input type="text" id="paymentLabel" placeholder="Thẻ Visa cá nhân" />
+            </label>
+            <label>
+              <span>Loại thẻ</span>
+              <select id="paymentBrand">
+                <option value="visa">Visa</option>
+                <option value="mastercard">Mastercard</option>
+                <option value="jcb">JCB</option>
+              </select>
+            </label>
+            <label>
+              <span>4 số cuối</span>
+              <input type="text" id="paymentLast4" maxlength="4" pattern="[0-9]{4}" placeholder="1234" />
+            </label>
+            <label>
+              <span>Ngày hết hạn</span>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" />
+            </label>
+            <label>
+              <span>CVV</span>
+              <input type="text" id="cardCVV" placeholder="123" maxlength="3" />
+            </label>
+            <label>
+              <span>Tên chủ thẻ</span>
+              <input type="text" id="cardName" placeholder="NGUYEN VAN A" />
+            </label>
+          </div>
+        </div>
+
+        <!-- VietQR Fields -->
+        <div id="vietqrFields" class="payment-method-fields hidden">
+          <div class="form-group">
+            <label>
+              <span>Tên hiển thị</span>
+              <input type="text" id="vietqrLabel" placeholder="VietQR - Ngân hàng ABC" />
+            </label>
+          </div>
+          <div class="payment-note">
+            <small>📱 Quét mã QR bằng ứng dụng ngân hàng để thanh toán</small>
+          </div>
+        </div>
+
+        <!-- MoMo Fields -->
+        <div id="momoFields" class="payment-method-fields hidden">
+          <div class="form-grid">
+            <label>
+              <span>Tên hiển thị</span>
+              <input type="text" id="momoLabel" placeholder="MoMo - Số điện thoại" />
+            </label>
+            <label>
+              <span>Số điện thoại MoMo</span>
+              <input type="tel" id="momoPhone" placeholder="0901234567" />
+            </label>
+          </div>
+          <div class="payment-note">
+            <small>💳 Thanh toán qua ví điện tử MoMo</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <span>Đặt làm mặc định</span>
+            <select id="paymentDefault">
+              <option value="no" selected>Không</option>
+              <option value="yes">Có</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Lưu phương thức</button>
+          <button type="button" class="ghost-btn" id="cancelPaymentForm">Huỷ</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>GreenBus Lines</strong>
+        <p>Địa chỉ: 549-36 Lê Văn Thọ, Gò Vấp, TP.HCM · Hotline: 1900-1234</p>
+      </div>
+      <div>© 2025 GreenBus</div>
+    </div>
+  </footer>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal chọn vé để tạo QR -->
+  <div class="modal-overlay hidden" id="qrModalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Tạo mã QR cho vé</h2>
+        <button type="button" class="modal-close" id="closeQRModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">Chọn vé đã xác nhận để tạo mã QR:</p>
+        <div class="booking-selection" id="bookingSelection">
+          <p class="muted">Đang tải danh sách vé...</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="ghost-btn" id="cancelQRModal">Hủy</button>
+        <button type="button" class="btn-primary" id="generateQRSubmit" disabled>Tạo QR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../../helpers/assets.js"></script>
+  <script src="../../../helpers/api.js"></script>
+  <script src="account.js?v=3.0"></script>
+</body>
+</html>

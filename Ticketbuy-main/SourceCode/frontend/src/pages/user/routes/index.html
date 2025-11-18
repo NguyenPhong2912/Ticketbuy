@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Tuyến phổ biến - GreenBus</title>
+  <link rel="stylesheet" href="routes.css?v=3.0" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="../../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="logo">
+        <span class="brand">GreenBus</span>
+      </div>
+
+      <!-- 🔹 Nút về trang chủ -->
+      <nav class="main-nav">
+        <a href="../home page/index.html" class="btn outline">Về trang chủ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container content">
+    <h1>Tuyến phổ biến</h1>
+    
+    <!-- Form tìm kiếm theo ngày -->
+    <div class="search-filter">
+      <form id="dateFilterForm" class="filter-form">
+        <label for="filterDate" class="filter-label">
+          <span class="filter-icon">📅</span>
+          <span>Tìm tuyến theo ngày khởi hành</span>
+        </label>
+        <div class="filter-input-group">
+          <input 
+            type="date" 
+            id="filterDate" 
+            class="filter-input"
+            min=""
+          />
+          <button type="submit" class="btn-filter">Tìm kiếm</button>
+          <button type="button" id="clearFilter" class="btn-clear">Xóa bộ lọc</button>
+        </div>
+      </form>
+      <div id="filterStatus" class="filter-status"></div>
+    </div>
+    
+    <div class="card-grid" id="routeGrid" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 GreenBus</div>
+  </footer>
+
+  <script src="../../../helpers/assets.js"></script>
+  <script src="../../../helpers/api.js"></script>
+  <script src="routes.js?v=3.0"></script>
+</body>
+</html>
+

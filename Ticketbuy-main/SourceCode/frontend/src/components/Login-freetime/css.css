@@ -1,0 +1,190 @@
+/* From Uiverse.io by roroland */ 
+.tooltip-container {
+    --fx: #d19d9d;
+    --accent: #587676;
+    --background: #dcd1a9;
+    --darker: #8c782f;
+    --xtip: 50%;
+    --dist: -2.5em;
+    --xdist: -55%;
+    --deg: -5deg;
+    --linear: linear(
+      0,
+      0.009,
+      0.035 2.1%,
+      0.141,
+      0.281 6.7%,
+      0.723 12.9%,
+      0.938 16.7%,
+      1.017,
+      1.077,
+      1.121,
+      1.149 24.3%,
+      1.159,
+      1.163,
+      1.161,
+      1.154 29.9%,
+      1.129 32.8%,
+      1.051 39.6%,
+      1.017 43.1%,
+      0.991,
+      0.977 51%,
+      0.974 53.8%,
+      0.975 57.1%,
+      0.997 69.8%,
+      1.003 76.9%,
+      1.004 83.8%,
+      1
+    );
+    --elastic-easing: linear(
+      0,
+      0.01566 4.55%,
+      0.0625 9.091%,
+      0.25,
+      0.5625,
+      1,
+      0.8125 45.455%,
+      0.76566 49.995%,
+      0.75,
+      0.76566 59.096%,
+      0.8125 63.636%,
+      1 72.727%,
+      0.95316 77.268%,
+      0.9375 81.818%,
+      0.95309 86.359%,
+      1 90.909%,
+      0.98438 95.45%,
+      1
+    );
+  
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1em;
+  }
+  .lever {
+    fill: var(--fx);
+    translate: 0 45%;
+    transition:
+      translate 0.3s var(--linear),
+      fill 0.3s ease-out;
+  }
+  .timer {
+    animation: rotate 1s ease-out infinite;
+    outline-width: 2px;
+    outline-color: var(--fx);
+    outline-style: dashed;
+    border-radius: 50%;
+  }
+  
+  .tooltip {
+    position: absolute;
+    text-shadow: -2px 0px rgba(183, 162, 130, 0.75);
+    inset-block-start: 0;
+    inset-inline-start: var(--xtip);
+    text-align: center;
+    line-height: 1.125;
+    transform: translateX(var(--xdist));
+    border: 6px solid #645620;
+    outline-width: 2px;
+    outline-offset: -9px;
+    outline-color: #64562052;
+    outline-style: solid;
+    padding: 1em 0.5em 2.5em;
+    font-size: 1em;
+    border-radius: 1em;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s var(--linear);
+    background: linear-gradient(var(--background) 60%, var(--darker) 100%);
+    z-index: -1;
+  }
+  .toasterGroup {
+    &::after {
+      content: "";
+      filter: blur(10px);
+      background-color: black;
+      border-radius: 50%;
+      display: block;
+      position: absolute;
+      translate: -10px -10%;
+      inset-block-end: 0;
+      width: 100%;
+      height: 10px;
+      z-index: 0;
+    }
+  }
+  .toaster {
+    transition: all 0.5s var(--elastic-easing);
+  }
+  .block {
+    transition: all 0.125s ease-out;
+  }
+  
+  .tooltip-container:hover {
+    .lever {
+      translate: 0;
+      fill: var(--accent);
+    }
+    .block {
+      fill: var(--fx);
+    }
+    .tooltip {
+      inset-block-start: -50%;
+      opacity: 1;
+      color: #514621;
+      visibility: visible;
+      pointer-events: auto;
+  
+      max-width: 25ch;
+      overflow: hidden;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    .toasterGroup::after {
+      animation: shadow 0.3s var(--elastic-easing) forwards;
+    }
+    .toaster {
+      --xdist: 0%;
+      animation: jump 2s var(--elastic-easing) forwards -0.5s;
+    }
+    .timer {
+      animation-play-state: paused;
+    }
+  }
+  .tooltip-container:hover:active {
+    .tooltip {
+      --dist: -3em;
+      --deg: 359deg;
+      animation: jump 0.5s ease-in-out forwards;
+    }
+  }
+  
+  @keyframes jump {
+    0%,
+    50% {
+      transform: translateX(var(--xdist)) translateY(0);
+    }
+    25% {
+      transform: translateX(var(--xdist)) translateY(var(--dist))
+        rotate(var(--deg));
+    }
+  }
+  @keyframes shadow {
+    0%,
+    50% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(0.75) skew(-10deg);
+      opacity: 0.85;
+    }
+  }
+  
+  @keyframes rotate {
+    to {
+      outline-color: var(--accent);
+      outline-offset: -2px;
+    }
+  }
+  

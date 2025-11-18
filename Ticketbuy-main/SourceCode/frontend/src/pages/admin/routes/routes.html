@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Quản lý Tuyến xe - GreenBus Admin</title>
+    <link rel="stylesheet" href="/Ticketbuy-main/SourceCode/frontend/src/pages/admin/admin.css?v=1.0">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>GreenBus Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard/dashboard.html" class="nav-item">
+                    <span class="nav-item-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="routes.html" class="nav-item active">
+                    <span class="nav-item-icon">🛣️</span>
+                    Tuyến xe
+                </a>
+                <a href="../bookings/bookings.html" class="nav-item">
+                    <span class="nav-item-icon">🎫</span>
+                    Đặt vé
+                </a>
+                <a href="../customers/customers.html" class="nav-item">
+                    <span class="nav-item-icon">👥</span>
+                    Khách hàng
+                </a>
+                <a href="../promotions/promotions.html" class="nav-item">
+                    <span class="nav-item-icon">🎁</span>
+                    Khuyến mãi
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Quản lý Tuyến xe</h1>
+                <p class="page-subtitle">Thêm, sửa, xóa các tuyến xe trong hệ thống</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Danh sách tuyến xe</h2>
+                    <button class="btn btn-primary" id="addRouteBtn">+ Thêm tuyến</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên tuyến</th>
+                                    <th>Chi tiết</th>
+                                    <th>Ngày đi</th>
+                                    <th>Giá vé</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="routesTableBody">
+                                <tr><td colspan="6" class="loading">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Route Modal -->
+    <div id="routeModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 0.75rem; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto;">
+            <h3 style="margin-bottom: 1.5rem;" id="modalTitle">Thêm tuyến mới</h3>
+            <form id="routeForm">
+                <div class="form-group">
+                    <label class="form-label">Điểm đi *</label>
+                    <select class="form-input" id="routeFrom" required>
+                        <option value="">-- Chọn điểm đi --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Điểm đến *</label>
+                    <select class="form-input" id="routeTo" required>
+                        <option value="">-- Chọn điểm đến --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tên tuyến *</label>
+                    <input type="text" class="form-input" id="routeName" required placeholder="Sẽ tự động điền khi chọn điểm đi/đến" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Chi tiết (Khoảng cách & Thời gian)</label>
+                    <input type="text" class="form-input" id="routeDetails" placeholder="Sẽ tự động tính toán" readonly>
+                    <small style="color: var(--admin-gray-500); font-size: 0.75rem; margin-top: 0.25rem; display: block;">
+                        Tự động tính từ bản đồ địa lý Việt Nam
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Giá vé (₫) *</label>
+                    <input type="number" class="form-input" id="routePrice" required min="0" placeholder="290000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ngày đi *</label>
+                    <input type="date" class="form-input" id="routeDate" min="" required>
+                    <small style="color: var(--admin-gray-500); font-size: 0.75rem; margin-top: 0.25rem; display: block;">
+                        Chọn ngày khởi hành của tuyến (ví dụ: 11/11/2025)
+                    </small>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" id="cancelRouteBtn">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/Ticketbuy-main/SourceCode/frontend/src/helpers/api.js" defer></script>
+    <script src="/Ticketbuy-main/SourceCode/frontend/src/pages/admin/routes/vietnam-cities.js"></script>
+    <script src="routes.js" defer></script>
+</body>
+</html>
