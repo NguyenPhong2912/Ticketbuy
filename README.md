@@ -88,13 +88,7 @@ Website mô phỏng hệ thống quản lý đặt vé xe buýt trực tuyến s
 
 5. **Cấu hình kết nối Database (nếu cần):**
    - Mở file: `SourceCode/database/db_connection.php`
-   - Kiểm tra thông tin kết nối:
-     ```php
-     $host = 'localhost';
-     $dbname = 'bus_booking_db';
-     $username = 'root';
-     $password = ''; // Mặc định XAMPP là rỗng
-     ```
+   - chạy File db_connection.php ( tự động cấu hình )
 
 6. **Chạy dự án:**
    - Frontend: http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/user/routes/index.html
@@ -107,8 +101,9 @@ Website mô phỏng hệ thống quản lý đặt vé xe buýt trực tuyến s
 
 ### Tài khoản Admin:
 - **Email:** xampleadmin@greenbus.vn
-- **Password:** 123456
+- **Password:** 1532006
 - **Quyền:** Quản lý toàn bộ hệ thống
+- **Nếu password không đúng:** có thể dùng chức năng quên mật khẩu để reset password về ( đây chỉ là demo nên cố định
 
 ### Tài khoản User (mẫu):
 - **Email:** xample@gmail.com
@@ -121,30 +116,18 @@ Website mô phỏng hệ thống quản lý đặt vé xe buýt trực tuyến s
 
 ## V. LINK TRIỂN KHAI ONLINE (FREE HOST)
 
-**URL:** https://_____________________________________
+**URL:** https://thanhphong.fun/Ticketbuy-main/SourceCode/frontend/src/pages/auth/login.html
 
-**Hosting:** (Ví dụ: 000webhost, InfinityFree, etc.)
+**Hosting:** Hostinger
 
-**Database:** (Thông tin database trên hosting)
+**Database:** Hostinger
 
 ---
 
 ## VI. LINK GITHUB (BẮT BUỘC)
 
 **Repo chính (public):** 
-https://github.com/________________________________
-
-**Nhánh từng sinh viên (BẮT BUỘC):**
-- **SV1:** https://github.com/.../tree/branch-sv1
-- **SV2:** https://github.com/.../tree/branch-sv2
-- **SV3:** https://github.com/.../tree/branch-sv3
-
-### Ghi chú về Git:
-- ✅ Mỗi thành viên phải có log commit rõ ràng xuyên suốt 3 tuần
-- ✅ Commit message phải mô tả rõ thay đổi (ví dụ: "Add booking feature", "Fix payment validation")
-- ✅ Không có log = không đạt đồ án (theo yêu cầu học phần)
-- ✅ Mỗi thành viên làm việc trên branch riêng, sau đó merge vào main/master
-
+https://github.com/NguyenPhong2912/Ticketbuy
 ---
 
 ## VII. CẤU TRÚC THƯ MỤC BÀI NỘP
@@ -276,8 +259,8 @@ Ticketbuy-main/
 ## X. THÔNG TIN LIÊN HỆ
 
 Nếu có thắc mắc hoặc gặp vấn đề, vui lòng liên hệ:
-- **Email nhóm:** __________________
-- **GitHub Issues:** https://github.com/.../issues
+- **Email nhóm:** phong.2474802010304@vanlanguni.vn
+- **GitHub Issues:** https://github.com/NguyenPhong2912
 
 ---
 
