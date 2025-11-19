@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 18, 2025 lúc 02:16 PM
+-- Thời gian đã tạo: Th10 19, 2025 lúc 02:40 PM
 -- Phiên bản máy phục vụ: 8.0.43
 -- Phiên bản PHP: 8.2.12
 
@@ -31,9 +31,13 @@ CREATE TABLE `bookings` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
   `route_id` int NOT NULL,
+  `trip_id` int DEFAULT NULL,
   `seat_quantity` int NOT NULL DEFAULT '1',
-  `seat_numbers` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('pending','confirmed','cancelled','completed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `seat_numbers` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` enum('pending','confirmed','cancelled','completed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `promotion_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `discount_amount` decimal(10,2) DEFAULT '0.00',
   `departure_date` date NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -43,13 +47,27 @@ CREATE TABLE `bookings` (
 -- Đang đổ dữ liệu cho bảng `bookings`
 --
 
-INSERT INTO `bookings` (`id`, `user_id`, `route_id`, `seat_quantity`, `seat_numbers`, `status`, `departure_date`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 2, NULL, 'confirmed', '2025-11-18', '2025-11-15 07:35:56', '2025-11-15 07:35:56'),
-(2, 2, 3, 1, NULL, 'confirmed', '2025-11-25', '2025-11-15 07:35:56', '2025-11-17 04:44:28'),
-(3, 3, 3, 1, '[\"10\"]', 'cancelled', '2025-11-15', '2025-11-15 14:44:50', '2025-11-17 16:52:49'),
-(4, 3, 3, 1, '[\"14\"]', 'cancelled', '2025-11-17', '2025-11-17 02:35:47', '2025-11-17 16:52:48'),
-(5, 5, 5, 1, '[\"A10\"]', 'cancelled', '2025-11-17', '2025-11-17 06:30:33', '2025-11-17 16:52:45'),
-(6, 3, 1, 1, '[\"A10\"]', 'cancelled', '2025-12-20', '2025-11-18 00:16:26', '2025-11-18 00:19:04');
+INSERT INTO `bookings` (`id`, `user_id`, `route_id`, `trip_id`, `seat_quantity`, `seat_numbers`, `status`, `promotion_code`, `total_price`, `discount_amount`, `departure_date`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, NULL, 2, NULL, 'confirmed', NULL, NULL, 0.00, '2025-11-18', '2025-11-15 07:35:56', '2025-11-15 07:35:56'),
+(2, 2, 3, NULL, 1, NULL, 'confirmed', NULL, NULL, 0.00, '2025-11-25', '2025-11-15 07:35:56', '2025-11-17 04:44:28'),
+(3, 3, 3, NULL, 1, '[\"10\"]', 'cancelled', NULL, NULL, 0.00, '2025-11-15', '2025-11-15 14:44:50', '2025-11-17 16:52:49'),
+(4, 3, 3, NULL, 1, '[\"14\"]', 'cancelled', NULL, NULL, 0.00, '2025-11-17', '2025-11-17 02:35:47', '2025-11-17 16:52:48'),
+(5, 5, 5, NULL, 1, '[\"A10\"]', 'cancelled', NULL, NULL, 0.00, '2025-11-17', '2025-11-17 06:30:33', '2025-11-17 16:52:45'),
+(6, 3, 1, 1, 1, '[\"A10\"]', 'cancelled', NULL, NULL, 0.00, '2025-12-20', '2025-11-18 00:16:26', '2025-11-19 19:34:13'),
+(7, 3, 258, 20561, 2, '[\"A12\",\"A05\"]', 'confirmed', NULL, 900000.00, 0.00, '2025-12-29', '2025-11-19 03:31:48', '2025-11-19 19:34:13'),
+(8, 3, 253, 20161, 3, '[\"A10\",\"A12\",\"A11\"]', 'confirmed', 'Test2', 0.00, 750000.00, '2025-12-21', '2025-11-19 07:25:40', '2025-11-19 19:34:13'),
+(10, 3, 221, 17601, 3, '[\"A03\",\"A10\",\"A17\"]', 'confirmed', NULL, 495000.00, 0.00, '2025-12-23', '2025-11-19 18:23:06', '2025-11-19 19:34:13'),
+(12, 3, 267, 21281, 2, '[\"A02\",\"A09\"]', 'confirmed', 'test', 156000.00, 1404000.00, '2025-12-19', '2025-11-19 18:59:25', '2025-11-19 19:34:13'),
+(13, 3, 267, 21281, 1, '[\"A03\"]', 'confirmed', 'MUAHE2025', 624000.00, 156000.00, '2025-12-19', '2025-11-19 19:00:40', '2025-11-19 19:34:13'),
+(14, 3, 267, 21281, 1, '[\"A04\"]', 'confirmed', 'BLACKFRIDAY', 663000.00, 117000.00, '2025-12-19', '2025-11-19 19:04:58', '2025-11-19 19:34:13'),
+(15, 3, 138, 10961, 3, '[\"A02\",\"A09\",\"A16\"]', 'confirmed', NULL, 360000.00, 0.00, '2025-12-23', '2025-11-19 19:14:46', '2025-11-19 19:34:13'),
+(17, 3, 138, 10963, 3, '[\"A03\",\"A10\",\"A17\"]', 'confirmed', NULL, 360000.00, 0.00, '2025-12-23', '2025-11-19 19:50:47', '2025-11-19 19:50:47'),
+(18, 3, 138, 10962, 1, '[\"A02\"]', 'confirmed', NULL, 120000.00, 0.00, '2025-12-23', '2025-11-19 19:51:46', '2025-11-19 19:51:46'),
+(20, 3, 11, 801, 1, '[\"A01\"]', 'confirmed', NULL, 850000.00, 0.00, '2025-12-24', '2025-11-19 19:53:18', '2025-11-19 19:53:18'),
+(21, 3, 269, 21442, 1, '[\"A05\"]', 'confirmed', NULL, 850000.00, 0.00, '2025-12-24', '2025-11-19 19:56:35', '2025-11-19 19:56:35'),
+(23, 3, 269, 21441, 1, '[\"A04\"]', 'confirmed', NULL, 850000.00, 0.00, '2025-12-24', '2025-11-19 19:58:11', '2025-11-19 19:58:11'),
+(24, 3, 269, 21441, 1, '[\"A03\"]', 'confirmed', NULL, 850000.00, 0.00, '2025-12-24', '2025-11-19 20:00:23', '2025-11-19 20:00:23'),
+(25, 3, 269, 21441, 1, '[\"A05\"]', 'confirmed', NULL, 850000.00, 0.00, '2025-12-24', '2025-11-19 20:00:41', '2025-11-19 20:00:41');
 
 -- --------------------------------------------------------
 
@@ -60,9 +78,9 @@ INSERT INTO `bookings` (`id`, `user_id`, `route_id`, `seat_quantity`, `seat_numb
 CREATE TABLE `payment_methods` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
-  `label` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `brand` enum('visa','mastercard','napas','bank','other') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'visa',
-  `last4` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand` enum('visa','mastercard','napas','bank','other') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'visa',
+  `last4` char(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_default` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -83,10 +101,10 @@ INSERT INTO `payment_methods` (`id`, `user_id`, `label`, `brand`, `last4`, `is_d
 
 CREATE TABLE `promotions` (
   `id` int NOT NULL,
-  `code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `discount_percent` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `status` enum('active','inactive','expired') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `status` enum('active','inactive','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `valid_from` date DEFAULT NULL,
   `valid_until` date DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -111,8 +129,8 @@ INSERT INTO `promotions` (`id`, `code`, `description`, `discount_percent`, `stat
 
 CREATE TABLE `routes` (
   `id` int NOT NULL,
-  `name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `departure_date` date DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -408,7 +426,7 @@ CREATE TABLE `trips` (
   `departure_time` time NOT NULL,
   `total_seats` int NOT NULL DEFAULT '40',
   `available_seats` int NOT NULL DEFAULT '40',
-  `status` enum('active','cancelled','completed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `status` enum('active','cancelled','completed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -11400,7 +11418,7 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 (10958, 137, '2025-12-25', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
 (10959, 137, '2025-12-25', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
 (10960, 137, '2025-12-25', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
-(10961, 138, '2025-12-23', '08:00:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
+(10961, 138, '2025-12-23', '08:00:00', 40, 37, 'active', '2025-11-17 06:03:27', '2025-11-19 19:35:18'),
 (10962, 138, '2025-12-23', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
 (10963, 138, '2025-12-23', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
 (10964, 138, '2025-12-23', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:27', '2025-11-17 23:58:37'),
@@ -18053,7 +18071,7 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 (17598, 220, '2025-12-20', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
 (17599, 220, '2025-12-20', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
 (17600, 220, '2025-12-20', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
-(17601, 221, '2025-12-23', '08:00:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
+(17601, 221, '2025-12-23', '08:00:00', 40, 37, 'active', '2025-11-17 06:03:34', '2025-11-19 19:35:18'),
 (17602, 221, '2025-12-23', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
 (17603, 221, '2025-12-23', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
 (17604, 221, '2025-12-23', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:34', '2025-11-17 23:58:37'),
@@ -20618,7 +20636,7 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 (20158, 252, '2025-12-17', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
 (20159, 252, '2025-12-17', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
 (20160, 252, '2025-12-17', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
-(20161, 253, '2025-12-21', '08:00:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
+(20161, 253, '2025-12-21', '08:00:00', 40, 37, 'active', '2025-11-17 06:03:37', '2025-11-19 19:35:18'),
 (20162, 253, '2025-12-21', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
 (20163, 253, '2025-12-21', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
 (20164, 253, '2025-12-21', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:37', '2025-11-17 23:58:37'),
@@ -21019,7 +21037,7 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 (20558, 257, '2025-12-18', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (20559, 257, '2025-12-18', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (20560, 257, '2025-12-18', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
-(20561, 258, '2025-12-29', '08:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
+(20561, 258, '2025-12-29', '08:00:00', 40, 38, 'active', '2025-11-17 06:03:38', '2025-11-19 19:35:18'),
 (20562, 258, '2025-12-29', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (20563, 258, '2025-12-29', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (20564, 258, '2025-12-29', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
@@ -21741,7 +21759,7 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 (21278, 266, '2025-12-30', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (21279, 266, '2025-12-30', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (21280, 266, '2025-12-30', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
-(21281, 267, '2025-12-19', '08:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
+(21281, 267, '2025-12-19', '08:00:00', 40, 36, 'active', '2025-11-17 06:03:38', '2025-11-19 19:35:18'),
 (21282, 267, '2025-12-19', '10:30:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (21283, 267, '2025-12-19', '14:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
 (21284, 267, '2025-12-19', '18:00:00', 40, 40, 'active', '2025-11-17 06:03:38', '2025-11-17 23:58:37'),
@@ -21990,12 +22008,12 @@ INSERT INTO `trips` (`id`, `route_id`, `departure_date`, `departure_time`, `tota
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('user','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
-  `avatar_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('user','admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -22009,7 +22027,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password_hash`, `role`, `a
 (2, 'Khách Hàng Demo', 'user@greenbus.vn', '0911002200', '$2y$10$JtN1S2ZO9mpj6JrjGgW5xOKS3lcbg0IxSc53K1V5P7EMnpzHwAH12', 'user', NULL, '2025-11-15 07:35:56', '2025-11-15 07:35:56'),
 (3, 'Nguyễn Thành Phong', 'xample@gmail.com', '0916436782', '$2y$10$fApzcXDqsqI9Mhc.qVN5aO44JSPjfWFywdlqoSRYLTn55u89VyS9C', 'user', NULL, '2025-11-15 07:36:58', '2025-11-18 19:43:57'),
 (5, 'Admin GreenBus', 'xampleadmin@greenbus.vn', '0900000001', '$2y$10$/lOFCL1aZbaHiPTK8VsIOO5VkcKezRTz0P/Epj/JxjN7sfbIZIVaC', 'admin', NULL, '2025-11-17 04:30:49', '2025-11-17 04:30:49'),
-(6, 'Test User', 'test1763337030608@example.com', '090164384', '$2y$10$H6Gy1RaVy1Qm4hLItOKcHuTuL.PI.G12Ayi2OfBv7lDlUjWu4uff6', 'user', NULL, '2025-11-17 06:50:30', '2025-11-17 06:50:30');
+(6, 'Test User', 'test1763337030608@example.com', '090164384', '$2y$10$H6Gy1RaVy1Qm4hLItOKcHuTuL.PI.G12Ayi2OfBv7lDlUjWu4uff6', 'user', NULL, '2025-11-17 06:50:30', '2025-11-17 06:50:30'),
+(7, 'Nguyễn Thành Phòng', 'xample2@gmail.com', '0123456789', '$2y$10$YX2YBMA1EcLgd1N2Zkx5tegzbitsg0IGClVjvFMfkoPhl5A4I6PZ2', 'user', NULL, '2025-11-19 20:38:02', '2025-11-19 20:38:02');
 
 -- --------------------------------------------------------
 
@@ -22020,8 +22039,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password_hash`, `role`, `a
 CREATE TABLE `user_tokens` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
-  `token_hash` char(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_agent` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token_hash` char(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_agent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expires_at` datetime NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_used_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -22078,7 +22097,8 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token_hash`, `user_agent`, `expires
 (57, 5, '9b58eedb96a0ea128ada865b1354779bf60a30857622cfce9ba53cb6053ad6b5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-17 17:27:30', '2025-11-17 16:27:30', '2025-11-17 16:27:30'),
 (63, 5, '9c3499b56de087ae862b7c03afbc525d2d63f2442605fd8c975f53677202770f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-18 01:17:52', '2025-11-18 00:17:52', '2025-11-18 00:19:22'),
 (65, 5, '56837fd1bce85373c1d2835cddc62a8bae1ed668e8976c100ddbc341b705f11b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-18 20:57:06', '2025-11-18 19:57:06', '2025-11-18 19:57:12'),
-(66, 3, 'b4cb5d5bc30cd3eff670f060478c78d53b9811059fd0fff4a1a14e86deccb987', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-18 21:10:05', '2025-11-18 20:10:05', '2025-11-18 20:10:08');
+(66, 3, 'b4cb5d5bc30cd3eff670f060478c78d53b9811059fd0fff4a1a14e86deccb987', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-18 21:10:05', '2025-11-18 20:10:05', '2025-11-18 20:10:08'),
+(74, 7, 'f99e52cf007a11f818f51dc8238731916f9a3c247e2e5d5abbafe48fff9137b0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', '2025-11-19 21:38:17', '2025-11-19 20:38:17', '2025-11-19 20:38:17');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -22090,7 +22110,9 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token_hash`, `user_agent`, `expires
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idx_bookings_user` (`user_id`),
-  ADD KEY `idx_bookings_route` (`route_id`);
+  ADD KEY `idx_bookings_route` (`route_id`),
+  ADD KEY `idx_bookings_promotion_code` (`promotion_code`),
+  ADD KEY `idx_trip_id` (`trip_id`);
 
 --
 -- Chỉ mục cho bảng `payment_methods`
@@ -22148,7 +22170,7 @@ ALTER TABLE `user_tokens`
 -- AUTO_INCREMENT cho bảng `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `payment_methods`
@@ -22178,13 +22200,13 @@ ALTER TABLE `trips`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -22195,6 +22217,7 @@ ALTER TABLE `user_tokens`
 --
 ALTER TABLE `bookings`
   ADD CONSTRAINT `fk_bookings_route` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_bookings_trip` FOREIGN KEY (`trip_id`) REFERENCES `trips` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_bookings_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
