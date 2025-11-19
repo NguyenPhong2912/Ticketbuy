@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>GreenBus - Đặt vé xe trực tuyến</title>
+<link rel="stylesheet" href="booking.css?v=3.0" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo">
+      <img src="../../../assets/images/logo1.png" data-asset-src="images/logo1.png" alt="GreenBus logo">
+      <span class="brand">GreenBus</span>
+    </div>
+    <nav class="main-nav">
+      <a href="../home page/index.html">Trang chủ</a>
+      <a href="../routes/index.html">Tuyến phổ biến</a>
+      <a href="../about/index.html">Về chúng tôi</a>
+      <div class="user-nav" id="userNav">
+        <button class="user-toggle hidden" id="userMenuToggle" type="button">
+          <span class="user-name" id="userMenuName">Tài khoản</span>
+          <span class="user-role" id="userMenuRole"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
+        <div class="user-dropdown hidden" id="userDropdown">
+          <div class="user-info">
+            <p id="userDropdownName">GreenBus</p>
+            <small id="userDropdownEmail"></small>
+          </div>
+          <a href="../account/index.html">Hồ sơ & Vé</a>
+          <button type="button" id="logoutBtn">Đăng xuất</button>
+        </div>
+        <a href="../../auth/login.html" class="btn-login" id="navAuthLink">Đăng nhập / Đăng ký</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="booking-shell" data-asset-bg="images/HÌNH BANNER XE BUS.png">
+  <section class="card booking-form">
+    <div class="card-header">
+      <div>
+        <p class="eyebrow">Đặt vé</p>
+        <h1>Chọn ngày khởi hành</h1>
+        <p class="form-subtitle">Hệ thống sẽ tự động hiển thị các chuyến có sẵn</p>
+      </div>
+    </div>
+    <div class="booking-form-simple">
+      <div class="route-picker-wrapper">
+        <label class="route-label">
+          <span class="label-icon">📍</span>
+          <span class="label-text">Điểm đi</span>
+        </label>
+        <input id="fromLocation" type="text" class="route-input" placeholder="Chọn điểm đi">
+      </div>
+      <div class="route-picker-wrapper">
+        <label class="route-label">
+          <span class="label-icon">🎯</span>
+          <span class="label-text">Điểm đến</span>
+        </label>
+        <input id="toLocation" type="text" class="route-input" placeholder="Chọn điểm đến">
+      </div>
+      <div class="date-picker-wrapper">
+        <label class="date-label">
+          <span class="label-icon">📅</span>
+          <span class="label-text">Ngày khởi hành</span>
+        </label>
+        <input id="date" type="date" class="date-input-large" required>
+      </div>
+      <div class="seats-picker-wrapper">
+        <label class="seats-label">
+          <span class="label-icon">👥</span>
+          <span class="label-text">Số vé</span>
+        </label>
+        <div class="seats-input-group">
+          <button type="button" class="seats-btn" id="decreaseSeats">−</button>
+          <input id="seats" type="number" min="1" value="1" class="seats-input" required>
+          <button type="button" class="seats-btn" id="increaseSeats">+</button>
+        </div>
+      </div>
+      <div class="form-actions-wrapper">
+        <button type="button" class="btn-primary btn-search" id="searchTripsBtn">
+          <span>🔍</span>
+          <span>Tìm kiếm chuyến</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card results-card" id="resultsCard">
+    <div class="card-header">
+      <div>
+        <p class="eyebrow">Kết quả tìm kiếm</p>
+        <h2 id="resultsTitle">Chọn ngày để xem chuyến</h2>
+      </div>
+      <div class="legend" id="resultsLegend" style="display: none;">
+        <span class="pill">Nhấn "Chọn ghế" để đặt nhanh</span>
+      </div>
+    </div>
+    <div id="searchResults" class="results-grid" aria-live="polite">
+      <div class="empty-state">
+        <div class="empty-icon">🚌</div>
+        <p class="empty-text">Vui lòng chọn ngày khởi hành để xem các chuyến có sẵn</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section id="seatModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-inner">
+    <div class="modal-header">
+      <div>
+        <p class="eyebrow">Chọn ghế và ngày</p>
+        <h3 id="selectedRouteName">—</h3>
+        <p class="muted" id="selectedRouteMeta">Vui lòng chọn ngày và ít nhất một ghế.</p>
+      </div>
+      <button class="ghost-btn" id="closeSeatModal" type="button">Đóng</button>
+    </div>
+    <div class="date-selection">
+      <label>
+        <span>Ngày khởi hành</span>
+        <input type="date" id="modalDepartureDate" required min="">
+      </label>
+      <div id="tripAvailability" class="trip-availability"></div>
+    </div>
+    <div class="seat-legend">
+      <span><span class="dot available"></span> Ghế trống</span>
+      <span><span class="dot selected"></span> Đang chọn</span>
+      <span><span class="dot taken"></span> Đã giữ</span>
+    </div>
+    <div id="seatMap" class="seat-map"></div>
+    <div class="seat-actions">
+      <button id="cancelSeat" class="ghost-btn" type="button">Huỷ</button>
+      <button id="confirmSeat" class="btn-primary" type="button" disabled>Tiếp tục thanh toán</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="paymentModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-inner payment-modal">
+    <div class="modal-header">
+      <div>
+        <p class="eyebrow">Thanh toán</p>
+        <h3 id="paymentRouteName">—</h3>
+        <p class="muted" id="paymentSummary">—</p>
+      </div>
+      <button class="ghost-btn" id="closePaymentModal" type="button">Đóng</button>
+    </div>
+    <div class="payment-methods">
+      <!-- Promotion Code Section -->
+      <div class="promotion-section" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+        <label for="promotionCode" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Mã khuyến mãi (nếu có)</label>
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="text" id="promotionCode" placeholder="Nhập mã khuyến mãi" style="flex: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+          <button type="button" id="applyPromoBtn" class="ghost-btn" style="padding: 0.75rem 1.5rem;">Kiểm tra</button>
+        </div>
+        <div id="promoMessage" style="margin-top: 0.5rem; font-size: 0.875rem;"></div>
+        <div id="promoDiscount" style="margin-top: 0.5rem; display: none; color: #28a745; font-weight: 500;"></div>
+      </div>
+      
+      <div class="payment-tabs">
+        <button class="payment-tab active" data-method="card">Thẻ Visa/Mastercard/JCB</button>
+        <button class="payment-tab" data-method="vietqr">VietQR</button>
+        <button class="payment-tab" data-method="momo">MoMo</button>
+      </div>
+      
+      <div class="payment-content">
+        <!-- Card Payment -->
+        <div id="paymentCard" class="payment-panel active">
+          <form id="cardPaymentForm">
+            <div class="form-group">
+              <label>Số thẻ</label>
+              <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="cardNumber" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Ngày hết hạn</label>
+                <input type="text" placeholder="MM/YY" maxlength="5" id="cardExpiry" required>
+              </div>
+              <div class="form-group">
+                <label>CVV</label>
+                <input type="text" placeholder="123" maxlength="3" id="cardCVV" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tên chủ thẻ</label>
+              <input type="text" placeholder="NGUYEN VAN A" id="cardName" required>
+            </div>
+            <div class="payment-note">
+              <small>💳 Đây là mẫu demo, không thực hiện thanh toán thật</small>
+            </div>
+          </form>
+        </div>
+
+        <!-- VietQR Payment -->
+        <div id="paymentVietQR" class="payment-panel">
+          <div class="qr-payment">
+            <div class="qr-code-placeholder">
+              <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" fill="#f0f0f0"/>
+                <rect x="20" y="20" width="40" height="40" fill="#000"/>
+                <rect x="140" y="20" width="40" height="40" fill="#000"/>
+                <rect x="20" y="140" width="40" height="40" fill="#000"/>
+                <rect x="60" y="60" width="20" height="20" fill="#000"/>
+                <rect x="120" y="60" width="20" height="20" fill="#000"/>
+                <rect x="60" y="120" width="20" height="20" fill="#000"/>
+                <rect x="100" y="100" width="20" height="20" fill="#000"/>
+                <text x="100" y="190" text-anchor="middle" font-size="12" fill="#666">VietQR Demo</text>
+              </svg>
+            </div>
+            <p class="qr-amount">Số tiền: <strong id="vietqrAmount">0₫</strong></p>
+            <p class="qr-instruction">Quét mã QR bằng ứng dụng ngân hàng để thanh toán</p>
+            <div class="payment-note">
+              <small>📱 Đây là mẫu demo, không thực hiện thanh toán thật</small>
+            </div>
+            <button type="button" class="btn-confirm-payment-inline" id="confirmVietQRPayment">
+              Xác nhận hoàn thành thanh toán
+            </button>
+          </div>
+        </div>
+
+        <!-- MoMo Payment -->
+        <div id="paymentMoMo" class="payment-panel">
+          <div class="momo-payment">
+            <div class="momo-logo">MoMo</div>
+            <div class="form-group">
+              <label>Số điện thoại MoMo</label>
+              <input type="tel" placeholder="0901234567" id="momoPhone" required>
+            </div>
+            <div class="form-group">
+              <label>Mã OTP (demo: 123456)</label>
+              <input type="text" placeholder="Nhập mã OTP" maxlength="6" id="momoOTP" required>
+            </div>
+            <div class="payment-note">
+              <small>💳 Đây là mẫu demo, không thực hiện thanh toán thật</small>
+            </div>
+            <button type="button" class="btn-confirm-payment-inline" id="confirmMoMoPayment">
+              Xác nhận hoàn thành thanh toán
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="payment-actions">
+      <button id="backToSeat" class="ghost-btn" type="button">Quay lại</button>
+      <button id="confirmPayment" class="btn-primary" type="button">Xác nhận thanh toán</button>
+    </div>
+  </div>
+</section>
+
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="true"></div>
+
+<script src="../../../helpers/assets.js"></script>
+<script src="../../../helpers/api.js"></script>
+<script src="booking.js?v=3.4"></script>
+</body>
+</html>

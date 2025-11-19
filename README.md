@@ -1,18 +1,16 @@
-README - ĐỒ ÁN LẬP TRÌNH ỨNG DỤNG WEB
+# README - ĐỒ ÁN LẬP TRÌNH ỨNG DỤNG WEB
 
 ====================================
 
-NHÓM: FITLAB
+**NHÓM:** 4 - FITLAB
 
-HỌC PHẦN: Lập Trình Ứng Dụng Web
+**HỌC PHẦN:** Lập Trình Ứng Dụng Web
 
-Giảng viên: Ngô Thị Ngọc Thắm
+**Giảng viên:** ThS. Ngô Thị Ngọc Thắm
 
-----------------------------------------------------------------------
+---
 
-I. THÔNG TIN THÀNH VIÊN
-
-----------------------------------------------------------------------
+## I. THÔNG TIN THÀNH VIÊN
 
 - 2474802010304 – Nguyễn Thành Phong – Backend/API - Database - Triển Khai
 
@@ -20,271 +18,268 @@ I. THÔNG TIN THÀNH VIÊN
 
 - 2474802010206 – Lê Tấn Kiệt – Frontend/User - Word - Slide
 
+---
 
-----------------------------------------------------------------------
+## II. MÔ TẢ ĐỀ TÀI
 
-II. MÔ TẢ ĐỀ TÀI
+**Tên đề tài:** Nghiên cứu và xây dựng website bán vé xe
 
-----------------------------------------------------------------------
+**Mô tả ngắn:**
 
-Tên đề tài: Nghiên cứu và xây dựng website bán vé xe
+Website mô phỏng hệ thống quản lý đặt vé xe buýt trực tuyến sử dụng HTML5, CSS3, JavaScript (ES6+), PHP (PDO) và MySQL. Hệ thống hỗ trợ các chức năng:
 
-Mô tả ngắn:
+- **Người dùng:**
+  - Đăng ký/Đăng nhập tài khoản
+  - Tìm kiếm tuyến xe theo điểm đi, điểm đến và ngày khởi hành
+  - Xem danh sách chuyến xe có sẵn với thông tin chi tiết (giờ khởi hành, giá vé, số ghế trống)
+  - Chọn ghế ngồi trực quan (sơ đồ ghế 2 tầng)
+  - Áp dụng mã khuyến mãi khi thanh toán
+  - Thanh toán qua nhiều phương thức (Thẻ, VietQR, MoMo)
+  - Xem lịch sử đặt vé và quản lý thông tin cá nhân
+  - Hủy vé đã đặt
 
-Website mô phỏng hệ thống quản lý đặt vé xe bus trực tuyến sử dụng HTML5, CSS3, JavaScript (Vanilla), PHP và MySQL. Hệ thống hỗ trợ hai phân quyền: người dùng (user) và quản trị viên (admin). 
+- **Quản trị viên:**
+  - Quản lý tuyến xe (thêm/sửa/xóa)
+  - Quản lý chuyến xe (tạo chuyến theo ngày)
+  - Quản lý mã khuyến mãi
+  - Quản lý đơn đặt vé (xem, cập nhật trạng thái, hủy)
+  - Thống kê doanh thu, số lượng vé, khách hàng
+  - Dashboard với các chỉ số tổng quan
 
-Chức năng chính:
-- Đăng ký/Đăng nhập/Quên mật khẩu
-- Tìm kiếm và đặt vé xe bus theo tuyến và ngày
-- Quản lý thông tin cá nhân và lịch sử đặt vé
-- Dashboard quản trị với thống kê tổng quan
-- Quản lý tuyến xe, đặt vé, khách hàng, khuyến mãi
-- Tự động tính toán khoảng cách và thời gian di chuyển dựa trên bản đồ địa lý Việt Nam
-
-Công nghệ sử dụng:
-- Frontend: HTML5, CSS3, JavaScript (Vanilla)
-- Backend: PHP 7.4+ (PDO, RESTful API)
-- Database: MySQL/MariaDB
+**Công nghệ sử dụng:**
+- Frontend: HTML5, CSS3, JavaScript (Vanilla JS, ES6+), Responsive Design
+- Backend: PHP 8.0+, PDO (PHP Data Objects)
+- Database: MySQL 5.7+ / MariaDB
 - Server: Apache (XAMPP)
+- API: RESTful API với JSON
 
-----------------------------------------------------------------------
+---
 
-III. CÁCH CÀI ĐẶT & CHẠY DỰ ÁN (LOCALHOST - XAMPP)
+## III. CÁCH CÀI ĐẶT & CHẠY DỰ ÁN (LOCALHOST - XAMPP)
 
-----------------------------------------------------------------------
+### Yêu cầu hệ thống:
+- XAMPP (PHP 8.0+ và MySQL 5.7+)
+- Trình duyệt hiện đại (Chrome, Firefox, Edge)
 
-1. Cài đặt XAMPP
+### Các bước cài đặt:
+
+1. **Cài đặt XAMPP**
    - Tải và cài đặt XAMPP từ: https://www.apachefriends.org/
-   - Đảm bảo phiên bản PHP >= 7.4
+   - Đảm bảo đã cài đặt Apache và MySQL
 
-2. Copy toàn bộ thư mục SourceCode vào:
-   C:\xampp\htdocs\Ticketbuy-main\SourceCode\
+2. **Copy dự án vào thư mục htdocs**
+   ```
+   Copy toàn bộ thư mục Ticketbuy-main vào:
+   C:\xampp\htdocs\Ticketbuy-main\
+   ```
 
-3. Khởi động Apache và MySQL từ XAMPP Control Panel
+3. **Khởi động Apache và MySQL**
+   - Mở XAMPP Control Panel
+   - Start Apache và MySQL
 
-4. Import Database:
+4. **Import Database:**
    - Mở phpMyAdmin: http://localhost/phpmyadmin
-   - Tạo database mới: bus_booking_db
-   - Import file database từ phpMyAdmin:
-     + Export database từ phpMyAdmin (chọn database bus_booking_db > Export)
-     + Hoặc import file SQL đã export sẵn (nếu có)
+   - Tạo database mới: `bus_booking_db`
+   - Import file SQL:
+     - Vào tab "Import"
+     - Chọn file: `SourceCode/database/db_connection.php` (nếu có file SQL riêng)
+     - Hoặc chạy script SQL trực tiếp trong phpMyAdmin
+   - **Lưu ý:** Nếu database đã có sẵn, có thể sử dụng file `db_connection.php` để kết nối
 
-5. Cấu hình kết nối Database (nếu cần):
-   - File: database/db_connection.php
-   - Mặc định:
-     * Host: 127.0.0.1
-     * Database: bus_booking_db
-     * User: root
-     * Password: admin123
+5. **Cấu hình kết nối Database (nếu cần):**
+   - Mở file: `SourceCode/database/db_connection.php`
+   - Kiểm tra thông tin kết nối:
+     ```php
+     $host = 'localhost';
+     $dbname = 'bus_booking_db';
+     $username = 'root';
+     $password = ''; // Mặc định XAMPP là rỗng
+     ```
 
-6. Chạy dự án:
+6. **Chạy dự án:**
+   - Frontend: http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/user/routes/index.html
+   - Backend API: http://localhost/Ticketbuy-main/SourceCode/backend/public/
+   - Admin Dashboard: http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/admin/dashboard/dashboard.html
 
-   Trang chủ (User):
-   http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/user/home%20page/index.html
+---
 
-   Trang đăng nhập:
-   http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/auth/login.html
+## IV. TÀI KHOẢN ĐĂNG NHẬP
 
-   Admin Panel:
-   http://localhost/Ticketbuy-main/SourceCode/frontend/src/pages/admin/dashboard/dashboard.html
+### Tài khoản Admin:
+- **Email:** xampleadmin@greenbus.vn
+- **Password:** 123456
+- **Quyền:** Quản lý toàn bộ hệ thống
 
-   Backend API:
-   http://localhost/Ticketbuy-main/SourceCode/backend/public/
+### Tài khoản User (mẫu):
+- **Email:** xample@gmail.com
+- **Password:** 123456
+- **Quyền:** Đặt vé, xem lịch sử đặt vé
 
-----------------------------------------------------------------------
+**Lưu ý:** Các tài khoản này cần được tạo trong database. Nếu chưa có, có thể đăng ký tài khoản mới hoặc import dữ liệu mẫu.
 
-IV. TÀI KHOẢN ĐĂNG NHẬP
+---
 
-----------------------------------------------------------------------
+## V. LINK TRIỂN KHAI ONLINE (FREE HOST)
 
-Tài khoản Admin:
-- Email: admin@greenbus.vn
-- Password: admin123
+**URL:** https://_____________________________________
 
-Hoặc tạo tài khoản admin mới:
-- Chạy script: http://localhost/Ticketbuy-main/SourceCode/database/create_admin.php
-- Hoặc đăng ký tài khoản mới và cập nhật role = 'admin' trong database
+**Hosting:** (Ví dụ: 000webhost, InfinityFree, etc.)
 
-Tài khoản User:
-- Đăng ký tài khoản mới từ trang đăng ký
-- Hoặc sử dụng email/password đã tạo trong database
+**Database:** (Thông tin database trên hosting)
 
-Lưu ý: Sau khi reset mật khẩu (quên mật khẩu), mật khẩu mới sẽ là: 123456 ( đây là tính năng cố định vì là freehost không có bussiness mail để gửi OTP )
+---
 
-----------------------------------------------------------------------
+## VI. LINK GITHUB (BẮT BUỘC)
 
-V. LINK TRIỂN KHAI ONLINE (FREE HOST)
-
-----------------------------------------------------------------------
-
-URL: https://thanhphong.fun/frontend/src/pages/auth/login.html
-
-----------------------------------------------------------------------
-
-VI. LINK GITHUB (BẮT BUỘC)
-
-----------------------------------------------------------------------
-
-Repo chính (public): 
-
+**Repo chính (public):** 
 https://github.com/________________________________
 
-Nhánh từng sinh viên (BẮT BUỘC):
+**Nhánh từng sinh viên (BẮT BUỘC):**
+- **SV1:** https://github.com/.../tree/branch-sv1
+- **SV2:** https://github.com/.../tree/branch-sv2
+- **SV3:** https://github.com/.../tree/branch-sv3
 
-- SV1: https://github.com/.../tree/<branch_sv1>
+### Ghi chú về Git:
+- ✅ Mỗi thành viên phải có log commit rõ ràng xuyên suốt 3 tuần
+- ✅ Commit message phải mô tả rõ thay đổi (ví dụ: "Add booking feature", "Fix payment validation")
+- ✅ Không có log = không đạt đồ án (theo yêu cầu học phần)
+- ✅ Mỗi thành viên làm việc trên branch riêng, sau đó merge vào main/master
 
-- SV2: https://github.com/.../tree/<branch_sv2>
+---
 
-- SV3: https://github.com/.../tree/<branch_sv3>
+## VII. CẤU TRÚC THƯ MỤC BÀI NỘP
 
-Ghi chú:
+```
+Ticketbuy-main/
+│
+├── SourceCode/
+│   ├── frontend/
+│   │   └── src/
+│   │       ├── pages/
+│   │       │   ├── user/          # Trang người dùng
+│   │       │   │   ├── routes/    # Tuyến phổ biến
+│   │       │   │   ├── booking/   # Đặt vé
+│   │       │   │   └── account/   # Tài khoản
+│   │       │   └── admin/         # Trang quản trị
+│   │       │       └── dashboard/  # Dashboard admin
+│   │       ├── assets/            # CSS, JS, images
+│   │       └── components/        # Components dùng chung
+│   │
+│   ├── backend/
+│   │   ├── src/
+│   │   │   ├── Controllers/       # Controllers xử lý request
+│   │   │   ├── Models/            # Repositories (Data Access Layer)
+│   │   │   └── config/            # Cấu hình (bootstrap, database)
+│   │   └── public/
+│   │       └── index.php          # Entry point API
+│   │
+│   └── database/
+│       └── db_connection.php      # File kết nối database
+│
+├── Database/
+│   └── database.sql               # Script tạo bảng & dữ liệu mẫu
+│
+├── Documents/
+│   ├── BaoCao_DoAn_WebApp.pdf
+│   └── PhanCongThanhVien.pdf      # (hoặc nằm trong báo cáo)
+│
+├── Slides/
+│   └── SlideThuyetTrinh.pdf       # hoặc .pptx
+│
+├── Video/                          # (tùy chọn - khuyến khích)
+│   └── Demo_DoAn.mp4
+│
+└── README.md                       # File này
+```
 
-=> Mỗi thành viên phải có log commit rõ ràng xuyên suốt 3 tuần.
+### Mô tả cấu trúc:
 
-=> Không có log = không đạt đồ án (theo yêu cầu học phần).
+**Frontend:**
+- Sử dụng Vanilla JavaScript (không framework)
+- Responsive design với CSS3
+- API calls sử dụng Fetch API
+- Local Storage để quản lý session
 
-----------------------------------------------------------------------
+**Backend:**
+- RESTful API với PHP
+- PDO để tương tác database (an toàn, tránh SQL Injection)
+- JSON response format
+- Authentication với token-based
 
-VII. CẤU TRÚC THƯ MỤC BÀI NỘP
+**Database:**
+- MySQL với các bảng chính:
+  - `users` - Người dùng
+  - `routes` - Tuyến xe
+  - `trips` - Chuyến xe
+  - `bookings` - Đơn đặt vé
+  - `promotions` - Mã khuyến mãi
+  - `user_tokens` - Token đăng nhập
 
-----------------------------------------------------------------------
+---
 
-/Ticketbuy-main
-    /SourceCode (hoặc /Ticketbuy-main)
+## VIII. CÁC CHỨC NĂNG CHÍNH
 
-        /backend
-            /public
-                index.php (Entry point API)
-            /src
-                /Controllers (AuthController, RouteController, BookingController, ...)
-                /Models (UserRepository, RouteRepository, ...)
-                /config
-        
-        /frontend
-            /src
-                /pages
-                    /admin (Dashboard, Routes, Bookings, Customers, Promotions)
-                    /user (Home, Routes, Booking, Account)
-                    /auth (Login, Register)
-                /helpers
-                    api.js (GreenBusAPI helper)
-                /components (UI components)
-                /assets (Images, Videos)
-        
-        /database
-            db_connection.php (File kết nối database)
-            README.md (Hướng dẫn export database)
+### 1. Người dùng (User)
+- ✅ Đăng ký/Đăng nhập
+- ✅ Tìm kiếm tuyến xe
+- ✅ Xem danh sách chuyến xe
+- ✅ Chọn ghế ngồi (sơ đồ ghế 2 tầng)
+- ✅ Áp dụng mã khuyến mãi
+- ✅ Thanh toán (Thẻ, VietQR, MoMo)
+- ✅ Xem lịch sử đặt vé
+- ✅ Hủy vé
+- ✅ Quản lý thông tin cá nhân
 
-    /Database
+### 2. Quản trị viên (Admin)
+- ✅ Dashboard thống kê
+- ✅ Quản lý tuyến xe (CRUD)
+- ✅ Quản lý chuyến xe (CRUD)
+- ✅ Quản lý mã khuyến mãi (CRUD)
+- ✅ Quản lý đơn đặt vé (Xem, cập nhật trạng thái)
+- ✅ Thống kê doanh thu, số lượng vé
 
-        database.sql (Export từ phpMyAdmin - chứa toàn bộ cấu trúc và dữ liệu)
+---
 
-    /Documents
+## IX. GHI CHÚ QUAN TRỌNG
 
-        BaoCao_DoAn_WebApp.pdf
+### Yêu cầu bắt buộc:
+- ✅ Website phải chạy trên XAMPP và free host
+- ✅ Database phải import được không lỗi
+- ✅ Mã nguồn phải có comment, đặt tên rõ ràng
+- ✅ Báo cáo 10–15 trang kèm sơ đồ chức năng + ERD
+- ✅ Slide thuyết trình chuẩn bị đúng hạn
+- ✅ Đảm bảo mỗi thành viên hiểu phần mình làm
 
-        PhanCongThanhVien.pdf (hoặc nằm trong báo cáo)
+### Lưu ý kỹ thuật:
+- **Database:** File SQL phải không chứa stored procedures, triggers, hoặc DEFINER clauses để tránh lỗi khi import vào hosting
+- **API:** Tất cả API endpoints trả về JSON format
+- **Security:** Sử dụng PDO prepared statements để tránh SQL Injection
+- **Responsive:** Website phải responsive trên mobile, tablet, desktop
 
-    /Slides
+### Troubleshooting:
 
-        SlideThuyetTrinh.pdf hoặc .pptx
+**Lỗi kết nối database:**
+- Kiểm tra Apache và MySQL đã start chưa
+- Kiểm tra thông tin trong `db_connection.php`
+- Kiểm tra database đã được tạo chưa
 
-    /Video (tùy chọn - khuyến khích)
+**Lỗi 404 khi truy cập:**
+- Kiểm tra đường dẫn file có đúng không
+- Kiểm tra `.htaccess` (nếu có)
+- Kiểm tra cấu hình Apache
 
-    /README.txt hoặc README.md
+**Lỗi CORS:**
+- Đảm bảo frontend và backend chạy trên cùng domain hoặc cấu hình CORS headers
 
-----------------------------------------------------------------------
+---
 
-VIII. API ENDPOINTS
+## X. THÔNG TIN LIÊN HỆ
 
-----------------------------------------------------------------------
+Nếu có thắc mắc hoặc gặp vấn đề, vui lòng liên hệ:
+- **Email nhóm:** __________________
+- **GitHub Issues:** https://github.com/.../issues
 
-Authentication:
-- POST /auth/login - Đăng nhập
-- POST /auth/register - Đăng ký
-- POST /auth/logout - Đăng xuất
-- POST /auth/forgot-password - Quên mật khẩu
+---
 
-User:
-- GET /me - Lấy thông tin user hiện tại
-- PUT /me - Cập nhật thông tin user
+**Chúc các bạn hoàn thành đồ án tốt! 🚀**
 
-Routes:
-- GET /routes - Lấy danh sách tuyến
-- POST /routes - Tạo tuyến mới (admin)
-- PUT /routes/{id} - Cập nhật tuyến (admin)
-- DELETE /routes/{id} - Xóa tuyến (admin)
-
-Bookings:
-- GET /bookings - Lấy danh sách vé
-- POST /bookings - Đặt vé mới
-- PUT /bookings/{id} - Cập nhật vé
-- DELETE /bookings/{id} - Xóa vé
-- GET /bookings/seats - Lấy danh sách ghế đã đặt
-
-Admin:
-- GET /admin/stats - Thống kê tổng quan
-- GET /admin/customers - Danh sách khách hàng
-- GET /admin/bookings/stats - Thống kê đặt vé
-- GET /admin/revenue - Thống kê doanh thu
-
-Promotions:
-- GET /promotions - Lấy danh sách khuyến mãi
-- POST /promotions - Tạo khuyến mãi (admin)
-- PUT /promotions/{id} - Cập nhật khuyến mãi (admin)
-- DELETE /promotions/{id} - Xóa khuyến mãi (admin)
-
-----------------------------------------------------------------------
-
-IX. GHI CHÚ QUAN TRỌNG
-
-----------------------------------------------------------------------
-
-- Website phải chạy trên XAMPP và free host.
-
-- Database phải import được không lỗi (export từ phpMyAdmin).
-
-- Mã nguồn phải có comment, đặt tên rõ ràng.
-
-- Báo cáo 10–15 trang kèm sơ đồ chức năng + ERD.
-
-- Slide thuyết trình chuẩn bị đúng hạn.
-
-- Đảm bảo mỗi thành viên hiểu phần mình làm.
-
-- Backend API sử dụng Bearer Token authentication.
-
-- Frontend sử dụng GreenBusAPI helper để gọi API.
-
-- Đảm bảo Apache mod_rewrite đã được bật.
-
-- Kiểm tra console browser (F12) để debug lỗi JavaScript.
-
-- Kiểm tra Network tab để debug lỗi API.
-
-----------------------------------------------------------------------
-
-X. TROUBLESHOOTING
-
-----------------------------------------------------------------------
-
-Lỗi "GreenBusAPI chưa được khởi tạo":
-- Đảm bảo file api.js được load trước các script khác
-- Kiểm tra đường dẫn đến api.js có đúng không
-- Xóa cache trình duyệt (Ctrl + F5)
-
-Lỗi kết nối database:
-- Kiểm tra MySQL đã chạy chưa
-- Kiểm tra thông tin kết nối trong database/db_connection.php
-
-Lỗi 404 khi gọi API:
-- Kiểm tra URL API trong console browser
-- Đảm bảo Apache mod_rewrite đã được bật
-- Kiểm tra file .htaccess trong backend/public/
-
-Không thể đăng nhập:
-- Database chưa có user hoặc thông tin đăng nhập sai
-- Tạo user mới từ trang register
-- Hoặc tạo admin từ script create_admin.php
-
-----------------------------------------------------------------------

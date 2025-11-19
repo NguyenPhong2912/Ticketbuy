@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dashboard - GreenBus Admin</title>
+    <!-- CSS với đường dẫn tương đối và fallback tuyệt đối -->
+    <link rel="stylesheet" href="/Ticketbuy-main/SourceCode/frontend/src/pages/admin/admin.css?v=2.0">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span style="font-size: 1.5rem;">☰</span>
+        </button>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>GreenBus Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="nav-item-icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="../routes/routes.html" class="nav-item">
+                    <span class="nav-item-icon">🛣️</span>
+                    Tuyến xe
+                </a>
+                <a href="../bookings/bookings.html" class="nav-item">
+                    <span class="nav-item-icon">🎫</span>
+                    Đặt vé
+                </a>
+                <a href="../customers/customers.html" class="nav-item">
+                    <span class="nav-item-icon">👥</span>
+                    Khách hàng
+                </a>
+                <a href="../promotions/promotions.html" class="nav-item">
+                    <span class="nav-item-icon">🎁</span>
+                    Khuyến mãi
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Tổng quan hoạt động hệ thống</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-label">Tổng tuyến xe</div>
+                    <div class="stat-value" id="statTotalRoutes">—</div>
+                    <div class="stat-trend neutral">Đang tải...</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tổng chuyến</div>
+                    <div class="stat-value" id="statTotalTrips">—</div>
+                    <div class="stat-trend neutral">Đang tải...</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Khuyến mãi</div>
+                    <div class="stat-value" id="statTotalPromotions">—</div>
+                    <div class="stat-trend neutral">Đang tải...</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Vé hôm nay</div>
+                    <div class="stat-value" id="statTicketsToday">—</div>
+                    <div class="stat-trend neutral" id="statTicketGrowth">Đang tải...</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tổng khách hàng</div>
+                    <div class="stat-value" id="statTotalCustomers">—</div>
+                    <div class="stat-trend neutral">Đang tải...</div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Hoạt động gần đây</h2>
+                </div>
+                <div class="card-body">
+                    <div id="recentActivities" class="loading">Đang tải...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/Ticketbuy-main/SourceCode/frontend/src/helpers/api.js" defer></script>
+    <script src="dashboard.js" defer></script>
+</body>
+</html>
