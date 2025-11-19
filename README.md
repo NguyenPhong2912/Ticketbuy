@@ -264,5 +264,5 @@ Nếu có thắc mắc hoặc gặp vấn đề, vui lòng liên hệ:
 
 ---
 
-**Chúc các bạn hoàn thành đồ án tốt! 🚀**
+**Hết🚀**
 
